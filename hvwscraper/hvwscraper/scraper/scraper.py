@@ -1,3 +1,6 @@
+import time
+import random
+
 from typing import List
 from datetime import datetime as dt
 
@@ -17,10 +20,15 @@ class Scraper(ScraperBase):
         # get games
         games_l: List[games_models.Game] = []
         for i, monday in enumerate(monday_l):
-            games_l += self.games_service.get_games(monday)
-            print(f"Got games for {monday.strftime('%Y-%m-%d')} ({i+1}/{len(monday_l)})")
+            try:
+                games_l += self.games_service.get_games(monday)
+                print(f"Got games for {monday.strftime('%Y-%m-%d')} ({i+1}/{len(monday_l)})")
+            except Exception as e:
+                print(f"Error getting games for {monday.strftime('%Y-%m-%d')}: {e}")
+            time.sleep(random.randint(10, 20))
 
         # get reports
         for i, game in enumerate(games_l):
             self._get_and_save_game_report(game, monday)
             print(f"Got report for {game.gHomeTeam} vs {game.gGuestTeam} ({i+1}/{len(games_l)})")
+            time.sleep(random.randint(10, 20))

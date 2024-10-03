@@ -1,6 +1,8 @@
 # filetpyes
 *.pyc
+*.zip
 
 # folders
 __pycache__
 sdxtest.egg-info
+data
