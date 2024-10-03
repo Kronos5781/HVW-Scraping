@@ -1,8 +1,19 @@
 #! /usr/bin/env python3
 
+from datetime import datetime as dt
+
+from hvwscraper import Scraper
+
 
 def main():
-    print("Hello World!")
+
+    # config
+    start = dt(year=2024, month=8, day=1)
+    stop = dt(year=2024, month=9, day=30)
+
+    # ARBEIT ARBEIT ARBEIT
+    scraper = Scraper()
+    scraper.scrape(start, stop)
 
 
 if __name__ == "__main__":
