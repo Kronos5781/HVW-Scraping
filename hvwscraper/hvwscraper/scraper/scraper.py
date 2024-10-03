@@ -25,10 +25,10 @@ class Scraper(ScraperBase):
                 print(f"Got games for {monday.strftime('%Y-%m-%d')} ({i+1}/{len(monday_l)})")
             except Exception as e:
                 print(f"Error getting games for {monday.strftime('%Y-%m-%d')}: {e}")
-            time.sleep(random.randint(10, 20))
+            time.sleep(random.randint(40, 60))
 
         # get reports
         for i, game in enumerate(games_l):
             self._get_and_save_game_report(game, monday)
             print(f"Got report for {game.gHomeTeam} vs {game.gGuestTeam} ({i+1}/{len(games_l)})")
-            time.sleep(random.randint(10, 20))
+            time.sleep(random.randint(40, 60))
