@@ -13,4 +13,10 @@ def write_json(fp: str, data: Dict[str, Any]) -> None:
     with open(fp, "w") as f:
         json.dump(data, f, default=default_serializer, indent=4)
 
-    print(f"Data successfully written to {fp}")
+
+def read_json(fp: str) -> Dict[str, Any]:
+
+    with open(fp, "r") as f:
+        data = json.load(f)
+
+    return data
