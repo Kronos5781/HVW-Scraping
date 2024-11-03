@@ -1,3 +1,5 @@
+import os
+
 from datetime import datetime as dt
 from pydantic import BaseModel
 
@@ -11,3 +13,6 @@ class Report(BaseModel):
     goals_guest_team: str
     report_state: str
     report: str
+
+    def fp(self, tgt_dir: str) -> str:
+        return os.path.join(tgt_dir, f"{self.game_id}.txt")

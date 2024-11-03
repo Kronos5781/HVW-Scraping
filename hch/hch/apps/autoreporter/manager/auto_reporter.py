@@ -9,5 +9,6 @@ class AutoReporter(AutoReporterBase):
     def run(self) -> None:
 
         self._report_fetcher.fetch_reports()
-        reoports = self._report_db.get_all_reports()
-        print(reoports)
+        reports = self._report_db.get_all_reports()
+
+

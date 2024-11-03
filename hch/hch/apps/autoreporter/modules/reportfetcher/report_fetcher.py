@@ -3,8 +3,8 @@ from datetime import timedelta as td
 
 from .report_fetcher_base import ReportFetcherBase
 from ..reportdb import ReportDB
-from hch.utils import Logger
 from hch.conf import auto_reporter_conf
+from hch.utils import Logger
 
 
 logger = Logger()
@@ -17,10 +17,7 @@ class ReportFetcher(ReportFetcherBase):
 
     def fetch_reports(self) -> None:
 
-        start = dt.now() - td(days=auto_reporter_conf.DAYS_INTO_PAST)
-        stop = dt.now() + td(days=1)
-        logger.info(f"Fetching reports from {start} to {stop}")
+        reports = self._get_reports_from_scraper()
 
-        reports = self._scraper.scrape(start, stop)
-        print(reports)
-        print(len(reports))
+        for report in reports:
+            self._report_db.write_report(report)
