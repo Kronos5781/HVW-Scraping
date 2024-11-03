@@ -26,7 +26,9 @@ RUN apt-get install -y \
 RUN pip3 install --upgrade pip
 RUN pip3 install \
     numpy==2.0.2 \
-    pydantic==2.8.2
+    pydantic==2.8.2 \
+    requests==2.32.3 \
+    bs4==0.0.2
 
 ### KRONOS USER AND ROOT PASSWD###
 RUN useradd -ms /bin/bash kronos && \

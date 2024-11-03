@@ -11,7 +11,9 @@
         "--network=host",
         "--volume=/tmp/.X11-unix:/tmp/.X11-unix",
         "--volume=/dev:/dev",
-        "--privileged"
+        "--privileged",
+        "--env-file",
+        ".env/env.env"
     ],
     "containerEnv": {
         "DISPLAY": "${localEnv:DISPLAY}"
