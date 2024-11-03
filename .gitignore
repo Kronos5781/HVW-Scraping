@@ -6,3 +6,4 @@
 __pycache__
 sdxtest.egg-info
 data
+.env

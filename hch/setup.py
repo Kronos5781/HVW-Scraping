@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 
 setup(
-    name="hvwscraper",
+    name="hch",
     version="0.0.0",
     author="Maximilian Fenkart",
     author_email="maximilian.fenkart@protonmail.com",
