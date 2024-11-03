@@ -11,6 +11,7 @@ from ..services.games_service import GamesService
 from ..models import games as games_models
 from ..utils.weekday_translations import WEEKDAY_TRANSLATIONS
 from ..constants.folders import Folders
+from ..models import game_summary as game_summary_models
 
 
 class ScraperBase:
@@ -39,29 +40,15 @@ class ScraperBase:
 
         return monday_l
 
-    def _get_and_save_game_report(self, game: games_models.Game, monday: dt) -> None:
-
-        # generate filename
-        weekday = WEEKDAY_TRANSLATIONS[game.gWDay]
-        game_dt = monday + td(days=weekday)
-        fn = f"{game_dt.strftime('%Y-%m-%d')}_{game.gTime}_{game.gHomeTeam}_{game.gGuestTeam}.txt"
-
-        # replace invalid characters
-        invalid_chars = ["<", ">", ":", "\"", "/", "\\", "|", "?", "*", " ", "."]
-        for char in invalid_chars:
-            fn = fn.replace(char, "_")
+    def _get_game_report(self, game: games_models.Game) -> game_summary_models.GameSummary:
 
         # get report
         game_summary = self.game_summary_service.get_game_summary(game.gID)
         if game_summary.robotext.text is None:
-            print(f"Game {fn} has no report")
-            return
+            return game_summary
 
         # strip html
         soup = BeautifulSoup(game_summary.robotext.text, 'html.parser')
         game_summary.robotext.text = soup.get_text()
 
-        # write report
-        fp_report = os.path.join(Folders.DATA, fn)
-        with open(fp_report, "w") as f:
-            f.write(game_summary.robotext.text)
+        return game_summary

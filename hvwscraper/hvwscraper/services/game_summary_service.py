@@ -1,7 +1,6 @@
 import requests
 from datetime import datetime as dt
 
-from ..models import games as games_models
 from ..models import game_summary as game_summary_models
 
 
