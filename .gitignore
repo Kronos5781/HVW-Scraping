@@ -4,6 +4,7 @@
 
 # folders
 __pycache__
-sdxtest.egg-info
+hvwscraper.egg-info
+hch.egg-info
 data
 .env
